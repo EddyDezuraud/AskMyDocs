@@ -16,7 +16,8 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      apiBaseUrl: process.env.API_BASE_URL || 'http://localhost:3001/api'
+      apiBaseUrl: process.env.API_BASE_URL || 'http://localhost:3001/api',
+      sseBaseUrl: process.env.SSE_BASE_URL || 'http://localhost:3001/events'
     }
   },
 

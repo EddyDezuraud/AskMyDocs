@@ -46,8 +46,11 @@
 <style module>
 .wrapper {
   display: flex;
+  position: sticky;
+  top: 0;
   justify-content: center;
   border-bottom: solid 1px hsl(var(--border));
+  background: hsl(var(--background));
 }
 
 .inner {

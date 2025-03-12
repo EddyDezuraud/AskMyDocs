@@ -6,13 +6,15 @@
       @clear="clearChat" 
     />
     
-    <div>
+    <div :class="$style.messages">
       <ChatMessages 
         :messages="messages" 
         :format-time="formatTime"
       />
       
-      <ChatLoader v-if="isLoading" />
+      <ChatLoader v-if="isLoading" >
+        {{ loadingContent }}
+      </ChatLoader>
       
       <ChatError v-if="error" :error="error" />
     </div>
@@ -32,7 +34,7 @@ import { useApiService } from '~/services/api';
 import { useChat } from '~/composables/useChat';
 
 // Use destructuring to extract all methods and properties
-const { isLoading, messages, error, sendMessage, clearChat } = useChat();
+const { isLoading, messages, error, sendMessage, clearChat, loadingContent } = useChat();
 const apiService = useApiService();
 const inputMessage = ref('');
 const isReindexing = ref(false);
@@ -70,5 +72,9 @@ const formatTime = (timestamp) => {
 <style module>
 .wrapper {
   height: 100vh;
+}
+
+.messages {
+  padding-bottom: 200px;
 }
 </style>

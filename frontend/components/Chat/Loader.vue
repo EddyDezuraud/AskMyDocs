@@ -1,7 +1,7 @@
 <template>
     <div :class="$style.wrapper">
-      <UiLoader />
-      <span>The assistant is thinking...</span>
+      <Loader />
+      <slot></slot>
     </div>
   </template>
 

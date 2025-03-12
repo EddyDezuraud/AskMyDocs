@@ -11,7 +11,7 @@ export const chatController = {
     chat(req: Request, res: Response) {
         (async () => {
             try {
-                const { message } = req.body;
+                const { message, requestId } = req.body;
 
                 if (!message) {
                     return res.status(400).json({ error: 'Query is required' });
@@ -19,7 +19,7 @@ export const chatController = {
                     console.log("New chat message: ", message);
                 }
 
-                const answer = await queryDocumentsWithContextualRetrieval(message);
+                const answer = await queryDocumentsWithContextualRetrieval(message, requestId);
 
                 console.log("Answer: ", answer.answer);
                 res.json(answer);

@@ -7,16 +7,21 @@ import { config } from './config';
 import express from 'express';
 import cors from 'cors';
 import apiRoutes from './routes/api.routes';
+import eventsRoutes from './routes/events.routes';
+
+const app = express();
+
+// Middleware
+app.use(cors());
+app.use(express.json());
+
+// Routes
+app.use('/api', apiRoutes);
+app.use('/events', eventsRoutes);
+
 
 async function startServer() {
-  const app = express();
 
-  // Middleware
-  app.use(cors());
-  app.use(express.json());
-
-  // Routes
-  app.use('/api', apiRoutes);
 
   // Initialize the vector database on startup
   const isCollection = await checkCollectionExists()

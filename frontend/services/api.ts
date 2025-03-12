@@ -23,11 +23,11 @@ export interface ChatMessage {
     const config = useRuntimeConfig();
     const baseUrl = config.public.apiBaseUrl;
   
-    const sendMessage = async (message: string): Promise<ChatResponse> => {
+    const sendMessage = async (message: string, requestId: string): Promise<ChatResponse> => {
       try {
         const response = await useFetch<ChatResponse>(`${baseUrl}/chat`, {
           method: 'POST',
-          body: { message },
+          body: { message, requestId },
         });
   
         if (response.error.value) {

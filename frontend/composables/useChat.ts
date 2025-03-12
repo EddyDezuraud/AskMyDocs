@@ -10,18 +10,50 @@ export const useChat = () => {
   const apiService = useApiService();
   
   const conversation = computed<ChatMessage[]>(() => messages.value);
-  
-  const sendMessage = async (content: string) => {
+
+  const logs = ref<string[]>([]); // Stores real-time logs from SSE
+  const loadingContent = ref(''); // Stores the latest step of the process
+  let eventSource: EventSource | null = null;
+
+  const config = useRuntimeConfig();
+  const baseUrl = config.public.sseBaseUrl;
+
+  const startSSE = () => {
+    if (eventSource) {
+      eventSource.close(); // Close any existing connection
+    }
+
+    eventSource = new EventSource(`${baseUrl}/logs`);
+
+    eventSource.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      logs.value.push(data.message); // Append new log message
+      loadingContent.value = data.message; // Update loading content
+    };
+
+    eventSource.onerror = () => {
+      console.error('Error in SSE connection');
+      eventSource?.close();
+    };
+  }
+
+
+  const sendMessage = async (content: string,) => {
     if (!content.trim()) return;
     
     try {
-      // Mettre à jour l'état de chargement
+      // Reset logs and loading state
       isLoading.value = true;
+      logs.value = [];
+      loadingContent.value = "Sending request...";
+
       error.value = null;
+
+      const requestId = uuidv4();
       
-      // Ajouter le message de l'utilisateur
+      // Add user message
       const userMessage: ChatMessage = {
-        id: uuidv4(),
+        id: requestId,
         role: 'user',
         content,
         timestamp: new Date()
@@ -33,7 +65,7 @@ export const useChat = () => {
       messages.value = currentMessages;
       
       // Envoyer la demande au backend
-      const response = await apiService.sendMessage(content);
+      const response = await apiService.sendMessage(content, requestId);
       
       // Ajouter la réponse de l'assistant
       const assistantMessage: ChatMessage = {
@@ -61,12 +93,24 @@ export const useChat = () => {
     messages.value = [];
     error.value = null;
   };
+
+  onMounted(() => {
+    startSSE();
+  })
+
+  // Cleanup function to close the SSE connection when the component unmounts
+  onUnmounted(() => {
+    if (eventSource) {
+      eventSource.close();
+    }
+  });
   
   return {
     messages,
     conversation,
     isLoading,
     error,
+    loadingContent,
     sendMessage,
     clearChat
   };

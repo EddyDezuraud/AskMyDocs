@@ -43,6 +43,7 @@ const handleSubmit = () => {
   left: 50%;
   transform: translateX(-50%);
   width: var(--global-small-width);
+  background-color: hsl(var(--background));
 }
 
 .form {

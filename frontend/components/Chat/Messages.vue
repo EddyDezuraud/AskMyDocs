@@ -1,8 +1,13 @@
 <template>
     <div :class="$style.wrapper">
       <div v-if="messages.length === 0" :class="$style.empty">
-        <p>Ask a question about your PDF documents</p>
-        <p>Documents must be placed in the /resources/docs folder</p>
+        <div :class="$style.innerEmpty">
+          <h2 :class="$style.emptyTitle">What do you want to know?</h2>
+          <p :class="$style.emptyParagraph">
+            Ask a question about your documents.<br/>
+            <i>Documents must be placed in the /resources/docs folder</i>
+          </p>
+        </div>
       </div>
       <div v-else :class="$style.messages">
         <ChatMessage 
@@ -37,8 +42,28 @@
     padding: 40px 40px 200px;
   }
 
+  .innerEmpty {
+    height: calc(100vh - 350px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
   .empty {
     text-align: center;
+  }
+
+  .emptyTitle {
+    font-size: 32px;
+    font-weight: 400;
+    margin-bottom: 10px;
+  }
+
+  .emptyParagraph {
+    font-size: 12px;
+    line-height: 145%;
+    font-weight: 300;
   }
 
   .messages {

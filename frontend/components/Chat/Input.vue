@@ -1,19 +1,14 @@
 <template>
   <div :class="$style.wrapper">
-      <form @submit.prevent="handleSubmit" :class="$style.form">
-        <textarea
-          :value="message"
-          @input="$emit('update:message', $event.target.value)"
-          placeholder="Ask a question about your documents..."
-          :disabled="isLoading || isReindexing"
-        />
-        <button
-          type="submit"
-          :disabled="isLoading || !message.trim() || isReindexing"
-          :class="$style.send"
-        >
-          <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-up"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M18 11l-6 -6" /><path d="M6 11l6 -6" /></svg>
-        </button>
+      <form @submit.prevent="handleSubmit" :class="$style.form" class="grid w-full gap-2 rounded-xl bg-muted/50">
+        <Textarea :v-model="message"
+                  @input="$emit('update:message', $event.target.value)"
+                  placeholder="Ask a question about your documents..."
+                  :disabled="isLoading || isReindexing" />
+        <Button type="submit"
+                :disabled="isLoading || !message.trim() || isReindexing">
+          Send message
+        </Button>
       </form>
   </div>
 </template>
@@ -47,19 +42,11 @@ const handleSubmit = () => {
   bottom: 40px;
   left: 50%;
   transform: translateX(-50%);
-  width: 400px;
-
-  background: #121922;
-  border-radius: 10px;
-  padding: 20px;
+  width: var(--global-small-width);
 }
 
 .form {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: flex-end;
-  gap: 10px;
+  padding: 1.5rem;
 }
 
 .wrapper textarea {
@@ -70,17 +57,5 @@ const handleSubmit = () => {
   color: white;
   border: none;
   font-family: inherit;
-}
-
-.send {
-  border: none;
-  cursor: pointer;
-  width: 32px;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: white;
 }
 </style>

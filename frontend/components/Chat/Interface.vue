@@ -1,5 +1,5 @@
 <template>
-  <div class="interfaceWrapper">
+  <div :class="$style.wrapper">
     <ChatHeader 
       :is-reindexing="isReindexing" 
       @reindex="handleReindex" 
@@ -34,7 +34,7 @@ import { useChat } from '~/composables/useChat';
 // Use destructuring to extract all methods and properties
 const { isLoading, messages, error, sendMessage, clearChat } = useChat();
 const apiService = useApiService();
-const inputMessage = ref(`When was the accessibility declaration made?`);
+const inputMessage = ref('');
 const isReindexing = ref(false);
 
 const onSendMessage = async () => {
@@ -66,3 +66,9 @@ const formatTime = (timestamp) => {
   return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 };
 </script>
+
+<style module>
+.wrapper {
+  height: 100vh;
+}
+</style>

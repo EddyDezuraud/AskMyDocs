@@ -1,10 +1,11 @@
 <template>
     <div
+        class="rounded-xl"
       :class="[
-          $style.wrapper,
+        $style.wrapper,
         message.role === 'user'
           ? $style.user
-          : 'ai-message'
+          : $style.botMessage
       ]"
     >
       <div :class="$style.header">
@@ -48,7 +49,7 @@
   }
 
   .user {
-    background: #212d3c;
+    background: hsl(var(--muted) / 0.5);
     align-self: flex-end;
     width: 500px;
     max-width: 90%;
@@ -84,5 +85,12 @@
     justify-content: space-between;
     font-size: 0.8rem;
     color: rgba(255, 255, 255, 0.5);
+  }
+
+  .botMessage {
+    background: hsl(var(--muted) / 0.1);
+    align-self: flex-start;
+    width: 500px;
+    max-width: 90%;
   }
   </style>

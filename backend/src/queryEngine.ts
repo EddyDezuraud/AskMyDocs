@@ -41,7 +41,7 @@ ${originalContent}`;
     console.log("Generating response with Ollama...");
     const prompt = `
 You are a technical assistant using Contextual Retrieval. 
-Provide a **short and precise answer** in the user's language based only on the retrieved context.
+Provide a **short and precise answer** in the user's language question based only on the retrieved context.
 
 If the retrieved context does not contain enough information, simply reply: "Not enough information available."
 

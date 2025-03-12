@@ -3,7 +3,7 @@ import path from "path";
 dotenv.config();
 
 export const config = {
-    MODEL_NAME: "phi4", // "llama3.2" for Llama 3.2
+    MODEL_NAME: "gemma3", // "llama3.2" for Llama 3.2
     EMBEDDING_MODEL: "llama3.2", // nomic-embed-text:latest
     DOCS_DIRECTORY: "../resources/docs",
     CHROMA_URL: "http://localhost:8000",

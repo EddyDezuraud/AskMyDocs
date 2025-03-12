@@ -129,6 +129,6 @@ dist
 .pnp.*
 frontend/package-lock.json
 backend/package-lock.json
-/resources/
-/resources/*
-/resources/chroma/
+resources/
+resources/*
+resources/chroma/

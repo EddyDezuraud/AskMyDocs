@@ -12,6 +12,6 @@
   flex-direction: column;
   gap: 10px;
   align-items: center;
-  padding: 40px 40px 200px;
+  padding: 0px 40px 200px;
 }
 </style>

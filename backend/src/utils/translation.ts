@@ -2,6 +2,13 @@ import { ask } from "./llm";
 
 export async function translateQueryToEnglish(query: string): Promise<string> {
     try {
+        const { franc } = await import("franc-min");
+
+        if (franc(query) === "eng") {
+            console.log("Query is already in English. Skipping translation.");
+            return query;
+        }
+
         console.log("Translating query to English...");
         const prompt = `
             You are an expert translator. Translate the following query from any language into English.

@@ -40,21 +40,18 @@ ${originalContent}`;
     // 5. Generate a response using Ollama
     console.log("Generating response with Ollama...");
     const prompt = `
-You are a technical assistant using Contextual Retrieval to provide very concise and accurate answers.
-Use the information below to answer the user's question.
+You are a technical assistant using Contextual Retrieval. 
+Provide a **short and precise answer** in the user's language based only on the retrieved context.
 
-For each passage, you have the contextual metadata and the original document content.
-Leverage both to fully understand the meaning and relevance of each passage.
+If the retrieved context does not contain enough information, simply reply: "Not enough information available."
 
-If the information is insufficient to answer, make it clear.
-
-Retrieved context:
+Context:
 ${context}
 
-User's question:
+Question:
 ${query}
 
-Answer:`;
+Answer (keep it concise):`;
 
     const { answer, think } = await ask(prompt);
 

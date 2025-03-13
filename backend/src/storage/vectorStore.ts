@@ -1,7 +1,7 @@
 // src/storage/vectorStore.ts
 import { Chroma } from "@langchain/community/vectorstores/chroma";
 import { Document } from "langchain/document";
-import { getEmbeddings } from "../models/ollama";
+import { getEmbeddings } from "../models/huggingface";
 import { config } from "../config";
 import { ChromaClient } from "chromadb";
 const client = new ChromaClient();

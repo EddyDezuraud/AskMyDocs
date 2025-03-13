@@ -4,7 +4,8 @@ dotenv.config();
 
 export const config = {
     MODEL_NAME: "gemma3", // "llama3.2" for Llama 3.2
-    EMBEDDING_MODEL: "llama3.2", // nomic-embed-text:latest
+    OLLAMA_EMBEDDING_MODEL: "llama3.2", // nomic-embed-text:latest
+    HUGGINGFACE_EMBEDDING_MODEL: "Xenova/paraphrase-multilingual-mpnet-base-v2",
     DOCS_DIRECTORY: "../resources/docs",
     CHROMA_URL: "http://localhost:8000",
     CHROMA_COLLECTION_NAME: "contextualized_documents",

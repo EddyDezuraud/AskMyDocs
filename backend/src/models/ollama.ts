@@ -22,7 +22,7 @@ export function getEmbeddings(): OllamaEmbeddings {
     if (!embeddingsInstance) {
         embeddingsInstance = new OllamaEmbeddings({
             baseUrl: config.OLLAMA_BASE_URL,
-            model: config.EMBEDDING_MODEL,
+            model: config.OLLAMA_EMBEDDING_MODEL,
         });
     }
     return embeddingsInstance;

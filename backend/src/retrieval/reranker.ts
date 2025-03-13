@@ -5,7 +5,6 @@ import { config } from "../config";
 import { ask } from "../utils/llm";
 
 export async function rerankResults(results: Document[], query: string): Promise<Document[]> {
-    console.log(`Reranking ${results.length} results...`);
 
     const rerankPrompt = `
         You are an efficient reranking system. Your task is to evaluate the relevance of each passage based on the query.
@@ -28,6 +27,7 @@ export async function rerankResults(results: Document[], query: string): Promise
         `;
 
     try {
+        console.log(`Reranking ${results.length} results...`);
         const { answer: response } = await ask(rerankPrompt);
         // Parse the returned JSON
         const scoresMatch = response.match(/\{[\s\S]*?\}/);

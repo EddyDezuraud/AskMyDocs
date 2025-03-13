@@ -5,6 +5,10 @@ import { config } from "../config";
 import { generateChunkContext, generateContextSummary } from "../utils/contextGenerator";
 import { BM25Index } from "../retrieval/bm25";
 
+function cleanText(text: string): string {
+    return text.replace(/\xa0/g, " "); // Remplace les espaces insécables par des espaces normaux
+}
+
 export async function processDocuments(rawDocs: Document[], improveChunk: boolean): Promise<{
     contextualizedDocs: Document[],
     bm25Index: BM25Index
@@ -19,7 +23,7 @@ export async function processDocuments(rawDocs: Document[], improveChunk: boolea
         if (!docsBySource.has(source)) {
             docsBySource.set(source, { content: "", doc });
         }
-        docsBySource.get(source)!.content += doc.pageContent + " ";
+        docsBySource.get(source)!.content += cleanText(doc.pageContent) + " ";
     }
 
     // Split documents into chunks and add context

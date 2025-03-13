@@ -29,6 +29,9 @@ It allows users to upload documents (PDF, DOCX, TXT, etc.) and ask questions bas
 │── package.json            # Backend dependencies
 
 /frontend/                  # Frontend of the project (Nuxt3 chat interface)
+
+/resources/                 # Directory for storing documents
+│── docs/                   # Here you can place your documents (PDF, DOCX, TXT, etc.)
 ```
 
 ## Backend Overview

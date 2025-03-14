@@ -88,9 +88,9 @@ It connects to the backend via API requests to send queries and display response
 This project uses **Ollama** to run the language model locally. You need to install it before running the backend.
 
 #### Install Ollama:
-```sh
-curl -fsSL https://ollama.com/install.sh | sh
-```
+
+[⬇️ Download ollama](https://ollama.com/)
+
 
 #### Download the `gemma3` model (or modify the model in `config.ts`):
 ```sh

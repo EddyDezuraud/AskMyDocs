@@ -83,17 +83,58 @@ It connects to the backend via API requests to send queries and display response
 
 ## Getting Started
 
-### Install Dependencies
+### 1. Install Ollama
+
+This project uses **Ollama** to run the language model locally. You need to install it before running the backend.
+
+#### Install Ollama:
+```sh
+curl -fsSL https://ollama.com/install.sh | sh
+```
+
+#### Download the `gemma3` model (or modify the model in `config.ts`):
+```sh
+ollama pull gemma3
+```
+
+If you want to use another model, update the **`OLLAMA_MODEL`** in the configuration file:
+```ts
+// src/config.ts
+export const config = {
+  OLLAMA_MODEL: "gemma3",  // Change this if needed
+  CHROMA_COLLECTION_NAME: "askmydocs",
+  EXPRESS_PORT: 3000,
+  DOCS_DIRECTORY: "./resources/docs",
+};
+```
+
+### 2. Add Documents
+
+Before running the indexing, make sure you have some documents inside the `/resources/docs/` folder.  
+You can place **PDF, DOCX, TXT, and other supported formats** in this directory.
+
+Example:
+```
+/resources/docs/
+│── example.pdf
+│── notes.txt
+│── report.docx
+```
+
+### 3. Install Dependencies
+
+Run the following command to install dependencies:
 ```sh
 npm install
 ```
 
-### Start the Backend
+### 4. Start the Backend
+
 ```sh
 npm run start
 ```
 
-### Use the API
+### 5. Use the API
 
 #### Chat with Documents
 ```sh
